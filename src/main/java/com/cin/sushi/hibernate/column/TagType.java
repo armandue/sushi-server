@@ -1,4 +1,4 @@
-package com.cin.sushi.hibernate;
+package com.cin.sushi.hibernate.column;
 
 import java.io.Serializable;
 import java.sql.Array;

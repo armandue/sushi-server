@@ -33,7 +33,7 @@ public class Sushi {
 	private SushiType type;
 	
 	@Column(name="tags")
-	@Type(type="com.cin.sushi.hibernate.TagType")
+	@Type(type="com.cin.sushi.hibernate.column.TagType")
 	@Enumerated(EnumType.STRING)
 	private List<Tag> tags;
 	

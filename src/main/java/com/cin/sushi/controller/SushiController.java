@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,18 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cin.sushi.entity.Sushi;
 import com.cin.sushi.enums.SushiType;
 import com.cin.sushi.enums.Tag;
-import com.cin.sushi.repository.SushiRepository;
 import com.cin.sushi.service.SushiService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
+@CrossOrigin
 @RequestMapping("sushi")
 public class SushiController {
-	
-	@Autowired
-	private SushiRepository sushiRepo;
 	
 	@Autowired
 	private SushiService sushiService;
@@ -35,13 +33,13 @@ public class SushiController {
 	@GetMapping
 	public List<Sushi> getAllSushi() {
 		log.info("Get all sushi.");
-		return sushiRepo.findAll();
+		return sushiService.findAll();
 	}
 	
 	@GetMapping(path="/page")
 	public Page<Sushi> getSushiWithPage(Pageable pageable) {
 		log.info("Get sushi with page {}.", pageable);
-		return sushiRepo.findAll(pageable);
+		return sushiService.findAll(pageable);
 	}
 	
 	@GetMapping(path="/book")
@@ -53,7 +51,7 @@ public class SushiController {
 	@GetMapping(path="/type")
 	public List<Sushi> getSushiBySushiType(SushiType type) {
 		log.info("Get sushi with type {}", type);
-		return sushiRepo.findByType(type);
+		return sushiService.findByType(type);
 	}
 	
 	@GetMapping(path="/save")
@@ -74,7 +72,7 @@ public class SushiController {
 		sushi.setUnit(1);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.START);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.COOKED);
@@ -87,7 +85,7 @@ public class SushiController {
 		sushi.setUnit(1);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.START);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.COOKED);
@@ -101,7 +99,7 @@ public class SushiController {
 		sushi.setUnit(1);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.START);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.RAW);
@@ -113,7 +111,7 @@ public class SushiController {
 		sushi.setUnit(12);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.MIXED);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.RAW);
@@ -125,7 +123,7 @@ public class SushiController {
 		sushi.setUnit(6);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.MIXED);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.RAW);
@@ -137,7 +135,7 @@ public class SushiController {
 		sushi.setUnit(6);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.MIXED);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.COOKED);
@@ -150,7 +148,7 @@ public class SushiController {
 		sushi.setUnit(6);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.MIXED);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 			
 		tags = new ArrayList<>();
 		tags.add(Tag.COOKED);
@@ -162,7 +160,7 @@ public class SushiController {
 		sushi.setUnit(1);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.SALAD);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.RAW);
@@ -174,7 +172,7 @@ public class SushiController {
 		sushi.setUnit(1);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.SALAD);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.RAW);
@@ -186,7 +184,7 @@ public class SushiController {
 		sushi.setUnit(3);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.SASHIMI);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.RAW);
@@ -198,7 +196,7 @@ public class SushiController {
 		sushi.setUnit(3);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.SASHIMI);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.RAW);
@@ -210,7 +208,7 @@ public class SushiController {
 		sushi.setUnit(3);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.SASHIMI);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 
 		tags = new ArrayList<>();
 		tags.add(Tag.COOKED);
@@ -222,7 +220,7 @@ public class SushiController {
 		sushi.setUnit(8);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.MAKI);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.COOKED);
@@ -234,7 +232,7 @@ public class SushiController {
 		sushi.setUnit(8);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.MAKI);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.COOKED);
@@ -246,7 +244,7 @@ public class SushiController {
 		sushi.setUnit(8);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.MAKI);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		
 		tags = new ArrayList<>();
@@ -259,7 +257,7 @@ public class SushiController {
 		sushi.setUnit(1);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.MAKI);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.RAW);
@@ -271,7 +269,7 @@ public class SushiController {
 		sushi.setUnit(1);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.MAKI);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.SPICY);
@@ -283,7 +281,7 @@ public class SushiController {
 		sushi.setUnit(1);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.RAMEN);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.SPICY);
@@ -296,7 +294,7 @@ public class SushiController {
 		sushi.setUnit(1);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.UDON);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.COOKED);
@@ -308,7 +306,7 @@ public class SushiController {
 		sushi.setUnit(1);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.UDON);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.VEGETABLE);
@@ -320,7 +318,7 @@ public class SushiController {
 		sushi.setUnit(1);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.DESSERT);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 		
 		tags = new ArrayList<>();
 		tags.add(Tag.VEGETABLE);
@@ -332,18 +330,18 @@ public class SushiController {
 		sushi.setUnit(1);
 		sushi.setTags(tags);
 		sushi.setType(SushiType.DESSERT);
-		sushiRepo.save(sushi);
+		sushiService.save(sushi);
 	}
 	
 	@GetMapping(path="/{sushiId}")
 	public Optional<Sushi> getSushi(@PathVariable Long sushiId) {
-		return sushiRepo.findById(sushiId);
+		return sushiService.findById(sushiId);
 	}
 	
 	@DeleteMapping(path="/{sushiId}")
 	public void deleteSushi(@PathVariable Long sushiId) {
 		log.info("Delete sushi with sushi id {}.", sushiId);
-		sushiRepo.deleteById(sushiId);
+		sushiService.deleteById(sushiId);
 	}
 	
 }

@@ -53,6 +53,6 @@ public class Book {
 	private String note;
 	
 	@Column(name="dish")
-	@Type(type="com.cin.sushi.hibernate.DishType")
+	@Type(type="com.cin.sushi.hibernate.column.DishType")
 	private List<Dish> dishes;
 }

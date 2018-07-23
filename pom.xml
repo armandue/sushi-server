@@ -6,7 +6,6 @@
 	<groupId>com.cin</groupId>
 	<artifactId>sushi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 
 	<name>sushi</name>
 	<description>Sushi house</description>
@@ -22,10 +21,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<INSTANCE_CONNECTION_NAME>sushi-postgresql:europe-west1:sushi</INSTANCE_CONNECTION_NAME>
-	    <user>postgres</user>
-	    <password>qwe107641</password>
-	    <database>postgres</database>
+		<docker.image.prefix>cin</docker.image.prefix>
+		<project.build.finalName>sushi-0.0.1-SNAPSHOT</project.build.finalName>
 	</properties>
 	
 	<dependencyManagement>
@@ -41,24 +38,11 @@
 	</dependencyManagement>
 
 	<dependencies>
-	
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-			<scope>provided</scope>
-		</dependency>
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		
-		 <dependency>
-	      <groupId>com.google.cloud.sql</groupId>
-	      <artifactId>postgres-socket-factory</artifactId>
-	      <version>1.0.5</version>
-	    </dependency>
 		
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
@@ -93,12 +77,16 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>appengine-maven-plugin</artifactId>
-                <version>1.3.1</version>
-            </plugin>
+	            <groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.3.6</version>
+				<configuration>
+					<repository>${docker.image.prefix}/sushi_image</repository>
+					<buildArgs>
+						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+				</configuration>
+	        </plugin>
 		</plugins>
 	</build>
-
-
 </project>
